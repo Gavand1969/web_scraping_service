@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "web-scraper-service"
+version = "0.2.0"
+description = "Polite, general-purpose web scraping service with HTTP API and CLI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Gavin Anderson", email = "gavanderson13@gmail.com" }]
+keywords = ["scraping", "flask", "beautifulsoup", "robots.txt", "rate-limit"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: Flask",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+]
+dependencies = [
+  "Flask>=3.0",
+  "requests>=2.32",
+  "beautifulsoup4>=4.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "ruff>=0.5"]
+
+[project.scripts]
+web-scraper = "web_scraper.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Gavand1969/web_scraping_service"
+Issues = "https://github.com/Gavand1969/web_scraping_service/issues"
+
+[tool.setuptools.packages.find]
+include = ["web_scraper*"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B017"]
